@@ -13,47 +13,59 @@ namespace Uppgift_5
         {
             //Välkommnar användaren
             Console.WriteLine("Welcome to the simple Calculator! :)");
-
-
-            char operation = ValidOperation();
-
-
-            double number1 = ValidNumber("\nEnter the first number: ");
-
-            double number2 = ValidNumber("Enter the second number: ");
-
-            double result = 0;
-
-            //Kör kontroll om operationen som är vald är division 
-            if (operation == '/')
+            //Do-while loop för att programmet ska fortsätta tills användaren väljer alternativ för att lämna
+            do
             {
-                number2 = DivisionByZero(number2);
-            }
+                //Lagt till ett alternativ ifall användaren vill lämna programmet
+                Console.WriteLine("\nEnter E if you want to leave ");
+                char operation = ValidOperation();
+
+                //Vid inmatning av E lämnar programmet loopen och avslutar
+                if (operation == 'E')
+                {
+                    Console.WriteLine("\nGoodbye! Press any key to exit");
+                    Console.ReadKey();
+                    break;
+                }
+
+                double number1 = ValidNumber("\nEnter the first number: ");
+
+                double number2 = ValidNumber("Enter the second number: ");
+
+                double result = 0;
+
+                //Kör kontroll om operationen som är vald är division 
+                if (operation == '/')
+                {
+                    number2 = DivisionByZero(number2);
+                }
 
 
-            switch (operation)
-            {
-                case '+':
-                    result = number1 + number2;
-                    break;
-                case '-':
-                    result = number1 - number2;
-                    break;
-                case '*':
-                    result = number1 * number2;
-                    break;
-                case '/':
-                    result = number1 / number2;
-                    break;
-                default:
-                    Console.WriteLine(operation + "Invalid input");
+                switch (operation)
+                {
+                    case '+':
+                        result = number1 + number2;
+                        break;
+                    case '-':
+                        result = number1 - number2;
+                        break;
+                    case '*':
+                        result = number1 * number2;
+                        break;
+                    case '/':
+                        result = number1 / number2;
+                        break;
+                    
+                    default:
+                        Console.WriteLine(operation + "Invalid input");
 
-                    break;
-            }
-
-
-            Console.WriteLine($"Result: {result}");
-            Console.ReadKey();
+                        break;
+                }
+                Console.WriteLine($"Result: {result}");
+                Console.WriteLine("Press any key to go back to choosing an operation");
+                Console.ReadKey();
+                
+            } while(true); 
         }
         //Kontrollerar om användaren skriver in en giltigt operation
         static char ValidOperation()
@@ -63,7 +75,7 @@ namespace Uppgift_5
             {
                 Console.WriteLine("Enter the operator: (+, -, *,/):");
                 operation = Console.ReadKey().KeyChar;
-                if (operation == '+' || operation == '-' || operation == '*' || operation == '/')
+                if (operation == '+' || operation == '-' || operation == '*' || operation == '/' || operation == 'E')
                 {
                     break;  // Lämnar loopen om operationen är giltig
                 }
